@@ -1,0 +1,41 @@
+version: "2"
+services:
+    app:
+        build: .
+        container_name: "${APP_NAME}_app"
+        environment:
+            DB_CONNECTION: pgsql
+            DB_HOST: db
+            DB_PORT: 5432
+            DB_DATABASE: "${DB_DATABASE}"
+            DB_USERNAME: "${DB_USERNAME}"
+            DB_PASSWORD: "${DB_PASSWORD}"
+
+        depends_on:
+            - db
+        links:
+            - db
+        networks:
+            - apps
+        ports:
+            - "8080:80"
+        volumes:
+            - .:/var/www/html
+    db:
+        container_name: "${APP_NAME}_postgres"
+        image: postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - data:/var/lib/postgresql/data
+        networks:
+            - apps
+        environment:
+            POSTGRES_DB: "${DB_DATABASE}"
+            POSTGRES_USER: "${DB_USERNAME}"
+            POSTGRES_PASSWORD: "${DB_PASSWORD}"
+networks:
+    apps:
+volumes:
+    data:
+        driver: local

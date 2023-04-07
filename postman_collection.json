@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "a9bb9a5b-0e7b-4b26-b270-f929cccee15e",
+		"name": "Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14452428"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"adminToken\",jsonData.data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "admin@admin.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin12345!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{adminUrl}}/auth/login",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{adminUrl}}/auth/logout",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Flags",
+					"item": [
+						{
+							"name": "ReadAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/flags",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"flags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "normal2",
+											"type": "text"
+										},
+										{
+											"key": "colorCode",
+											"value": "#ffffff",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{adminUrl}}/flags",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"flags"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Members",
+					"item": [
+						{
+							"name": "ReadAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/members",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"members"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateFlag",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/members/:memberId/flag/:flagId",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"members",
+										":memberId",
+										"flag",
+										":flagId"
+									],
+									"variable": [
+										{
+											"key": "memberId",
+											"value": "1"
+										},
+										{
+											"key": "flagId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PointRequests",
+					"item": [
+						{
+							"name": "ReadAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/point_requests?page=1",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"point_requests"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReadWaiting",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/point_requests?page=1",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"point_requests"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateState",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/point_requests/:requestId/point/:point/state/:state",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"point_requests",
+										":requestId",
+										"point",
+										":point",
+										"state",
+										":state"
+									],
+									"variable": [
+										{
+											"key": "requestId",
+											"value": "3"
+										},
+										{
+											"key": "point",
+											"value": "12222"
+										},
+										{
+											"key": "state",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "flag",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "cev",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{adminUrl}}/point_requests",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"point_requests"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "ReadAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{adminUrl}}/users",
+									"host": [
+										"{{adminUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{adminToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstName",
+											"value": "Necmettin",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Ceviz",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "necmettinraufceviz@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{clientUrl}}/v1/auth/register",
+									"host": [
+										"{{clientUrl}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"clientToken\",jsonData.data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "necmettinraufceviz@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{clientUrl}}/v1/auth/login",
+									"host": [
+										"{{clientUrl}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{clientUrl}}/v1/auth/logout",
+									"host": [
+										"{{clientUrl}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Points",
+					"item": [
+						{
+							"name": "MakePointRequest",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "point",
+											"value": "1000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{clientUrl}}/v1/points",
+									"host": [
+										"{{clientUrl}}"
+									],
+									"path": [
+										"v1",
+										"points"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{clientToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "adminUrl",
+			"value": "http://localhost:8080/admin-api",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "clientUrl",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		},
+		{
+			"key": "clientToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
